@@ -1,23 +1,23 @@
 package model;
 
 public class Book {
-    private String bookName;
+    private final String title;
     private int chapters;
 
     // EFFECTS: constructs a new book
-    public Book(String bookName, int chapters) {
-        this.bookName = bookName;
+    public Book(String title, int chapters) {
+        this.title = title;
         this.chapters = chapters;
     }
 
     // EFFECTS: returns book name
-    public String getBookName() {
-        return bookName;
+    public String getTitle() {
+        return this.title;
     }
 
     // EFFECTS: returns book chapter
     public int getChapters() {
-        return chapters;
+        return this.chapters;
     }
 
     // MODIFIES: this

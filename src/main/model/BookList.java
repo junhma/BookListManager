@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 public class BookList {
 
-    private List<Book> bookList = new ArrayList<>();
+    private final List<Book> bookList;
 
     // EFFECTS: constructs a new book list
     public BookList() {
+        bookList = new ArrayList<>();
     }
 
     // EFFECTS: returns the book list
@@ -21,19 +22,16 @@ public class BookList {
         return this.bookList.size();
     }
 
-    // REQUIRES: chapters > 0
     // MODIFIES: this
     // EFFECTS: adds a new book to the list of books
-    public void addBook(String bookName, int chapters) {
-        Book newBook = new Book(bookName, chapters);
-        bookList.add(newBook);
+    public void addBook(Book newBook) {
+        this.bookList.add(newBook);
     }
 
-    // REQUIRES: chapters > 0
+    // REQUIRES: a book in the book list
     // MODIFIES: this
-    // EFFECTS: remove a book from the list of books
-    public void removeBook(String bookName, int chapters) {
-        Book newBook = new Book(bookName, chapters);
-        bookList.remove(newBook);
+    // EFFECTS: remove a book from the book list
+    public boolean removeBook(Book oldBook) {
+        return this.bookList.remove(oldBook);
     }
 }
