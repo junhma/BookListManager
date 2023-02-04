@@ -8,24 +8,64 @@ import java.util.Scanner;
 public class EditBookList {
 
     // REQUIRES: a book list
-    // MODIFIES: this
+    // MODIFIES: the book list
     // EFFECTS: add a book to the book list
-    public BookList addBooksUI(BookList bookList, Scanner in) {
+    public void addBooksUI(BookList bookList, Scanner in) {
+        System.out.println("Do you want to add books? Yes/No");
+        String replyAdd = in.nextLine();
 
-        System.out.println("Enter the name of the book you want to add.");
-        String title = in.nextLine();
-        System.out.println("Enter the current chapter of the book you want to add (whole number only).");
+        if (replyAdd.equals("Yes")) {
+            System.out.println("Enter the name of the book you want to add.");
+            String title = in.nextLine();
+            System.out.println("Enter the current chapter of the book you want to add.");
+            int chapter = Integer.parseInt(in.nextLine());
 
-        int chapters = 0;
-        if (in.hasNextInt()) {
-            chapters = in.nextInt();
-        } else {
-            System.out.println("Please type a whole number.");
+            Book addedBook = new Book(title, chapter);
+            bookList.addBook(addedBook);
         }
+    }
 
-        Book newBook = new Book(title, chapters);
-        bookList.addBook(newBook);
+    // REQUIRES: a book list
+    // MODIFIES: the book list
+    // EFFECTS: add a book to the book list
+    public void removeBooksUI(BookList bookList, Scanner in) {
+        System.out.println("Do you want to remove books? Yes/No");
+        String replyRemove = in.nextLine();
 
-        return bookList;
+        if (replyRemove.equals("Yes")) {
+            System.out.println("Choose a book to remove.");
+            for (int i = 0; i < bookList.getBookListLength(); i++) {
+                System.out.println(i + "" + bookList.getBookList().get(i).getTitle());
+            }
+
+            int choice = Integer.parseInt(in.nextLine());
+
+            Book removedBook = bookList.getBookList().get(choice);
+            bookList.removeBook(removedBook);
+        }
+    }
+
+    // REQUIRES: a book list
+    // MODIFIES: the book list
+    // EFFECTS: see and edit the number of chapters for a given book
+    public void changeChaptersUI(BookList bookList, Scanner in) {
+        System.out.println("Do you want to change current chapter of a book? Yes/No");
+        String replyChangeChapters = in.nextLine();
+
+        if (replyChangeChapters.equals("Yes")) {
+            System.out.println("Choose a book.");
+            for (int i = 0; i < bookList.getBookListLength(); i++) {
+                System.out.println(i + " " + bookList.getBookList().get(i).getTitle());
+            }
+
+            int choice = Integer.parseInt(in.nextLine());
+
+            Book editedBook = bookList.getBookList().get(choice);
+            System.out.println("You are currently at chapter " + editedBook.getChapter());
+
+            System.out.println("Enter the new number of chapters.");
+            int numChapter = Integer.parseInt(in.nextLine());
+            editedBook.changeChapter(numChapter);
+        }
     }
 }

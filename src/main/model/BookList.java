@@ -31,7 +31,7 @@ public class BookList {
     // REQUIRES: a book in the book list
     // MODIFIES: this
     // EFFECTS: remove a book from the book list
-    public boolean removeBook(Book oldBook) {
-        return this.bookList.remove(oldBook);
+    public void removeBook(Book oldBook) {
+        this.bookList.remove(oldBook);
     }
 }

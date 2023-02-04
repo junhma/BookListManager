@@ -2,12 +2,13 @@ package model;
 
 public class Book {
     private final String title;
-    private int chapters;
+    private int chapter;
 
+    // REQUIRES: int >= 0
     // EFFECTS: constructs a new book
-    public Book(String title, int chapters) {
+    public Book(String title, int chapter) {
         this.title = title;
-        this.chapters = chapters;
+        this.chapter = chapter;
     }
 
     // EFFECTS: returns book name
@@ -16,13 +17,14 @@ public class Book {
     }
 
     // EFFECTS: returns book chapter
-    public int getChapters() {
-        return this.chapters;
+    public int getChapter() {
+        return this.chapter;
     }
 
+    // REQUIRES: int >= 0
     // MODIFIES: this
     // EFFECTS: change book chapter
-    public void changeChapters(int numChapters) {
-        this.chapters = numChapters;
+    public void changeChapter(int numChapter) {
+        this.chapter = numChapter;
     }
 }

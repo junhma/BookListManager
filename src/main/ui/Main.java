@@ -2,7 +2,6 @@ package ui;
 
 import model.BookList;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -14,17 +13,25 @@ public class Main {
         // creates an object of Scanner
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Do you want to add books? Yes/No");
-        String replyAdd = in.nextLine();
-        if (!replyAdd.equals("Yes") && !replyAdd.equals("No")) {
-            System.out.println("Sorry, I can't understand you. The two options are \"Yes\" and \"No\".");
-        } else if (replyAdd.equals("Yes")) {
-            bookList = editBookList.addBooksUI(bookList, in);
+        // add a book
+        editBookList.addBooksUI(bookList, in);
+
+
+        // remove a book
+        editBookList.removeBooksUI(bookList, in);
+
+
+        // change chapter of a book
+        editBookList.changeChaptersUI(bookList, in);
+
+        //  show list of books
+        for (int i = 0; i < bookList.getBookListLength(); i++) {
+            System.out.print(i + " " + bookList.getBookList().get(i).getTitle() + " ");
+            System.out.println("chapter " + bookList.getBookList().get(i).getChapter());
         }
 
-        if (bookList.getBookListLength() != 0) {
-            System.out.println(bookList.getBookList().get(0).getTitle());
-        }
+        // show number of books
+        System.out.println("There are " + bookList.getBookListLength() + " book(s) in the list.");
 
         // closes the scanner
         in.close();
