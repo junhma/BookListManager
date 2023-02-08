@@ -23,8 +23,10 @@ public class Book {
 
     // REQUIRES: int >= 0
     // MODIFIES: this
-    // EFFECTS: change book chapter
+    // EFFECTS: change book chapter if new chapter is larger
     public void changeChapter(int numChapter) {
-        this.chapter = numChapter;
+        if (this.chapter < numChapter) {
+            this.chapter = numChapter;
+        }
     }
 }

@@ -15,9 +15,15 @@ class BookTest {
     }
 
     @Test
-    void testChangeChapters() {
+    void testChangeChapterLower() {
         testBook.changeChapter(5);
-        assertEquals(5, testBook.getChapter());
+        assertEquals(10, testBook.getChapter());
+    }
+
+    @Test
+    void testChangeChapter() {
+        testBook.changeChapter(15);
+        assertEquals(15, testBook.getChapter());
     }
 
 }
