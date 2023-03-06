@@ -42,8 +42,8 @@ public class BookListHelper {
 
             System.out.println("Continue? Yes/No");
             replyContinue = in.nextLine();
-            } while (replyContinue.equals("Yes"));
-        }
+        } while (replyContinue.equals("Yes"));
+    }
 
     // REQUIRES: a book list
     // MODIFIES: the book list
