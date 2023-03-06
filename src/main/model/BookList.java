@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONArray;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents a book list (a list of books).
+ */
 public class BookList {
 
     private final List<Book> bookList;
@@ -33,5 +37,14 @@ public class BookList {
     // EFFECTS: remove a book from the book list
     public void removeBook(Book oldBook) {
         this.bookList.remove(oldBook);
+    }
+
+    // EFFECTS: returns the book list as a JSON array
+    public JSONArray toJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Book book : bookList) {
+            jsonArray.put(book.bookToJson());
+        }
+        return jsonArray;
     }
 }

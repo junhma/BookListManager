@@ -1,5 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+
+/**
+ * Represents a book. A book is composed of a title and a chapter number.
+ */
 public class Book {
     private final String title;
     private int chapter;
@@ -28,5 +33,13 @@ public class Book {
         if (this.chapter < numChapter) {
             this.chapter = numChapter;
         }
+    }
+
+    // EFFECTS: returns the book as a JSON object
+    public JSONObject bookToJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("chapter", this.chapter);
+        return json;
     }
 }
