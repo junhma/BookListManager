@@ -3,21 +3,28 @@ package ui;
 import model.BookList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-import static ui.BookListHelper.*;
+
+import static ui.BookListHelper.addBooksHelper;
+import static ui.BookListHelper.changeChaptersHelper;
+import static ui.BookListHelper.removeBooksHelper;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the book list application.
+ * code based on <a href="https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo">...</a>
+ */
 public class BookListApp {
 
-    private static final String JSON_STORE = "./data/book-list.json";
+    private static final String JSON_STORE = "./data/bookList.json";
     private Scanner input;
     private BookList bookList;
     private final JsonWriter jsonWriter;
     private final JsonReader jsonReader;
 
-    // EFFECTS: constructs workroom and runs application
+    // EFFECTS: constructs book list and runs application
     public BookListApp() throws FileNotFoundException {
         input = new Scanner(System.in);
         bookList = new BookList();
@@ -28,7 +35,7 @@ public class BookListApp {
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    private void runBookList() {
+    protected void runBookList() {
         boolean keepGoing = true;
         String command;
         input = new Scanner(System.in);
@@ -44,12 +51,12 @@ public class BookListApp {
                 processCommand(command);
             }
         }
-        System.out.println("\nGoodbye!");
+        System.out.println("\nGoodbye.");
         input.close();
     }
 
     // EFFECTS: displays menu of options to user
-    private void displayMenu() {
+    protected void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add books");
         System.out.println("\tr -> remove books");
@@ -62,7 +69,7 @@ public class BookListApp {
 
     // MODIFIES: this
     // EFFECTS: processes user command
-    private void processCommand(String command) {
+    protected void processCommand(String command) {
         switch (command) {
             case "a":
                 addBooksHelper(bookList, input);
@@ -83,39 +90,39 @@ public class BookListApp {
                 loadBookList();
                 break;
             default:
-                System.out.println("Selection not valid...");
+                System.out.println("\nSelection not valid.");
                 break;
         }
     }
 
-    // EFFECTS: prints all the thingies in workroom to the console
-    private void printBooks() {
+    // EFFECTS: prints all the books in the book list to the console
+    protected void printBooks() {
         for (int i = 0; i < bookList.getBookListLength(); i++) {
             System.out.print(i + " " + bookList.getBookList().get(i).getTitle() + " ");
-            System.out.println("chapter " + bookList.getBookList().get(i).getChapter());
+            System.out.println("Chapter " + bookList.getBookList().get(i).getChapter());
         }
     }
 
-    // EFFECTS: saves the workroom to file
-    private void saveBookList() {
+    // EFFECTS: saves the book list to a file
+    protected void saveBookList() {
         try {
             jsonWriter.open();
             jsonWriter.write(bookList);
             jsonWriter.close();
-            System.out.println("Saved book list to " + JSON_STORE);
+            System.out.println("\nSaved book list to " + JSON_STORE);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            System.out.println("\nUnable to write to file: " + JSON_STORE);
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
-    private void loadBookList() {
+    // EFFECTS: loads the book list from the file
+    protected void loadBookList() {
         try {
             bookList = jsonReader.read();
-            System.out.println("Loaded book list from " + JSON_STORE);
+            System.out.println("\nLoaded book list from " + JSON_STORE);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            System.out.println("\nUnable to read from file: " + JSON_STORE);
         }
     }
 }

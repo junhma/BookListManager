@@ -4,7 +4,8 @@ import model.BookList;
 
 import org.json.JSONArray;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 /**
  * Represents a writer that writes JSON representation of a book list to a file.
@@ -41,7 +42,7 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes string to file
-    private void saveToFile(String json) {
+    protected void saveToFile(String json) {
         writer.print(json);
     }
 }

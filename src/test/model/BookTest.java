@@ -1,7 +1,9 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class BookTest {
@@ -24,6 +26,17 @@ class BookTest {
     void testChangeChapter() {
         testBook.changeChapter(15);
         assertEquals(15, testBook.getChapter());
+    }
+
+    @Test
+    void testBookToJson() {
+        JSONObject testJsonObject = testBook.bookToJson();
+        String title = testBook.getTitle();
+        int chapter = testBook.getChapter();
+        String jsonTitle = testJsonObject.getString("title");
+        int jsonChapter = testJsonObject.getInt("chapter");
+        assertEquals(title, jsonTitle);
+        assertEquals(chapter, jsonChapter);
     }
 
 }

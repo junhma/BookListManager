@@ -36,7 +36,7 @@ public class Book {
     }
 
     // EFFECTS: returns the book as a JSON object
-    public JSONObject bookToJson() {
+    protected JSONObject bookToJson() {
         JSONObject json = new JSONObject();
         json.put("title", title);
         json.put("chapter", this.chapter);
