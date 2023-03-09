@@ -80,12 +80,12 @@ class BookTest {
     }
 
     @Test
-    void testEqualsNull(){
+    void testNotEqualNull(){
         assertNotEquals(testBook, null);
     }
 
     @Test
-    void testEqualsTitle(){
+    void testNotEqualTitle(){
         Book testBook2 = null;
         try {
             testBook2 = new Book("Over", 10);
@@ -96,7 +96,18 @@ class BookTest {
     }
 
     @Test
-    void testEqualsClass(){
+    void testNotEqualChapter(){
+        Book testBook2 = null;
+        try {
+            testBook2 = new Book("Over", 11);
+        } catch (NegativeChapterException e) {
+            fail("Unexpected NegativeChapterException");
+        }
+        assertNotEquals(testBook, testBook2);
+    }
+
+    @Test
+    void testNotEqualClass(){
         String testBook2 = "Overlord";
         assertNotEquals(testBook, testBook2);
     }
