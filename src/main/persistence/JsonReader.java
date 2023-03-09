@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.NegativeChapterException;
 import model.Book;
 import model.BookList;
 import org.json.JSONArray;
@@ -57,7 +58,13 @@ public class JsonReader {
     protected Book parseBook(JSONObject jsonObject) {
         String title = jsonObject.getString("title");
         int chapter = jsonObject.getInt("chapter");
-        return new Book(title, chapter);
+        Book book;
+        try {
+            book = new Book(title, chapter);
+        } catch (NegativeChapterException e) {
+            book = null;
+        }
+        return book;
     }
 
 }

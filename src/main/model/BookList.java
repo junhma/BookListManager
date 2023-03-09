@@ -26,17 +26,18 @@ public class BookList {
         return this.bookList.size();
     }
 
+    // REQUIRES: a book
     // MODIFIES: this
     // EFFECTS: adds a new book to the list of books
-    public void addBook(Book newBook) {
-        this.bookList.add(newBook);
+    public void addBook(Book book) {
+        this.bookList.add(book);
     }
 
     // REQUIRES: a book in the book list
     // MODIFIES: this
     // EFFECTS: remove a book from the book list
-    public void removeBook(Book oldBook) {
-        this.bookList.remove(oldBook);
+    public void removeBook(Book book) {
+        this.bookList.remove(book);
     }
 
     // EFFECTS: returns the book list as a JSON array

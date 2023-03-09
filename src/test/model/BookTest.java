@@ -1,14 +1,25 @@
 package model;
 
+import exceptions.NegativeChapterException;
 import org.json.JSONObject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class BookTest {
 
-    Book testBook = new Book("Overlord", 10);
+    Book testBook;
+
+    @BeforeEach
+    void runBefore() {
+        try {
+            testBook = new Book("Overlord", 10);
+        } catch (NegativeChapterException e) {
+            fail("Unexpected NegativeChapterException");
+        }
+    }
 
     @Test
     void testConstructor() {
@@ -17,26 +28,77 @@ class BookTest {
     }
 
     @Test
-    void testChangeChapterLower() {
-        testBook.changeChapter(5);
-        assertEquals(10, testBook.getChapter());
+    void testConstructorNegative() {
+        try {
+            testBook = new Book("Overlord", -10);
+            fail("Expect NegativeChapterException");
+        } catch (NegativeChapterException e) {
+            // success
+        }
     }
 
     @Test
     void testChangeChapter() {
-        testBook.changeChapter(15);
+        try {
+            testBook.changeChapter(15);
+        } catch (NegativeChapterException e) {
+            fail("Unexpected NegativeChapterException");
+        }
         assertEquals(15, testBook.getChapter());
     }
 
     @Test
+    void testChangeChapterNegative() {
+        try {
+            testBook.changeChapter(-15);
+            fail("Expect NegativeChapterException");
+        } catch (NegativeChapterException e) {
+            // success
+        }
+    }
+
+    @Test
     void testBookToJson() {
-        JSONObject testJsonObject = testBook.bookToJson();
+        JSONObject testToJson = testBook.bookToJson();
         String title = testBook.getTitle();
         int chapter = testBook.getChapter();
-        String jsonTitle = testJsonObject.getString("title");
-        int jsonChapter = testJsonObject.getInt("chapter");
+        String jsonTitle = testToJson.getString("title");
+        int jsonChapter = testToJson.getInt("chapter");
         assertEquals(title, jsonTitle);
         assertEquals(chapter, jsonChapter);
+    }
+    
+    @Test
+    void testEquals(){
+        Book testBook2 = null;
+        try {
+            testBook2 = new Book("Overlord", 10);
+        } catch (NegativeChapterException e) {
+            fail("Unexpected NegativeChapterException");
+        }
+        assertEquals(testBook, testBook2);
+    }
+
+    @Test
+    void testEqualsNull(){
+        assertNotEquals(testBook, null);
+    }
+
+    @Test
+    void testEqualsTitle(){
+        Book testBook2 = null;
+        try {
+            testBook2 = new Book("Over", 10);
+        } catch (NegativeChapterException e) {
+            fail("Unexpected NegativeChapterException");
+        }
+        assertNotEquals(testBook, testBook2);
+    }
+
+    @Test
+    void testEqualsClass(){
+        String testBook2 = "Overlord";
+        assertNotEquals(testBook, testBook2);
     }
 
 }

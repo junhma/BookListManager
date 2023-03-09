@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.NegativeChapterException;
 import org.json.JSONObject;
 
 /**
@@ -9,9 +10,12 @@ public class Book {
     private final String title;
     private int chapter;
 
-    // REQUIRES: int >= 0
+    // REQUIRES: title is not null, chapter >= 0
     // EFFECTS: constructs a new book
-    public Book(String title, int chapter) {
+    public Book(String title, int chapter) throws NegativeChapterException {
+        if (chapter < 0) {
+            throw new NegativeChapterException();
+        }
         this.title = title;
         this.chapter = chapter;
     }
@@ -28,15 +32,35 @@ public class Book {
 
     // REQUIRES: int >= 0
     // MODIFIES: this
-    // EFFECTS: change book chapter if new chapter is larger
-    public void changeChapter(int numChapter) {
-        if (this.chapter < numChapter) {
-            this.chapter = numChapter;
+    // EFFECTS: change book chapter
+    public void changeChapter(int numChapter) throws NegativeChapterException {
+        if (numChapter < 0) {
+            throw new NegativeChapterException();
         }
+        this.chapter = numChapter;
+    }
+
+    // EFFECTS: make 2 books as equal if they have the same titles and chapters
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        final Book other = (Book) obj;
+        if (!this.title.equals(other.title)) {
+            return false;
+        }
+
+        return this.chapter == other.chapter;
     }
 
     // EFFECTS: returns the book as a JSON object
-    protected JSONObject bookToJson() {
+    public JSONObject bookToJson() {
         JSONObject json = new JSONObject();
         json.put("title", title);
         json.put("chapter", this.chapter);
