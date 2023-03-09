@@ -99,7 +99,7 @@ class BookTest {
     void testNotEqualChapter(){
         Book testBook2 = null;
         try {
-            testBook2 = new Book("Over", 11);
+            testBook2 = new Book("Overlord", 11);
         } catch (NegativeChapterException e) {
             fail("Unexpected NegativeChapterException");
         }
