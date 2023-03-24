@@ -38,6 +38,18 @@ class BookTest {
     }
 
     @Test
+    void testChangeTitle() {
+        testBook.changeTitle("The Lord of the Rings");
+        assertEquals("The Lord of the Rings", testBook.getTitle());
+    }
+
+    @Test
+    void testChangeTitleEmpty() {
+        testBook.changeTitle("");
+        assertEquals("", testBook.getTitle());
+    }
+
+    @Test
     void testChangeChapter() {
         try {
             testBook.changeChapter(15);

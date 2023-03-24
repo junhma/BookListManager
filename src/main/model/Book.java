@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * Represents a book. A book is composed of a title and a chapter number.
  */
 public class Book {
-    private final String title;
+    private String title;
     private int chapter;
 
     // REQUIRES: title is not null, chapter >= 0
@@ -30,14 +30,20 @@ public class Book {
         return this.chapter;
     }
 
+    // MODIFIES: this
+    // EFFECTS: change book title
+    public void changeTitle(String title){
+        this.title = title;
+    }
+
     // REQUIRES: int >= 0
     // MODIFIES: this
     // EFFECTS: change book chapter
-    public void changeChapter(int numChapter) throws NegativeChapterException {
-        if (numChapter < 0) {
+    public void changeChapter(int chapter) throws NegativeChapterException {
+        if (chapter < 0) {
             throw new NegativeChapterException();
         }
-        this.chapter = numChapter;
+        this.chapter = chapter;
     }
 
     // EFFECTS: make 2 books as equal if they have the same titles and chapters

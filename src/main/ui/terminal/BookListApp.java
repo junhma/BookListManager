@@ -1,16 +1,14 @@
-package ui;
+package ui.terminal;
 
 import model.BookList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-import static ui.BookListHelper.addBooksHelper;
-import static ui.BookListHelper.changeChaptersHelper;
-import static ui.BookListHelper.removeBooksHelper;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+
+import static ui.terminal.BookListHelper.*;
 
 /**
  * Represents the book list application.
@@ -60,6 +58,7 @@ public class BookListApp {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add books");
         System.out.println("\tr -> remove books");
+        System.out.println("\tt -> change book titles");
         System.out.println("\tc -> change book chapters");
         System.out.println("\tp -> print book list");
         System.out.println("\ts -> save book list to a file");
@@ -76,6 +75,9 @@ public class BookListApp {
                 break;
             case "r":
                 removeBooksHelper(bookList, input);
+                break;
+            case "t":
+                changeTitlesHelper(bookList, input);
                 break;
             case "c":
                 changeChaptersHelper(bookList, input);
@@ -98,8 +100,8 @@ public class BookListApp {
     // EFFECTS: prints all the books in the book list to the console
     protected void printBooks() {
         for (int i = 0; i < bookList.getBookListLength(); i++) {
-            System.out.print(i + " " + bookList.getBookList().get(i).getTitle() + " ");
-            System.out.println("Chapter " + bookList.getBookList().get(i).getChapter());
+            System.out.print(i + " " + bookList.getBook(i).getTitle() + " ");
+            System.out.println("Chapter " + bookList.getBook(i).getChapter());
         }
     }
 

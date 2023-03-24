@@ -61,6 +61,25 @@ class BookListTest {
     }
 
     @Test
+    void testGetBook() {
+        assertEquals(testBook0, testBookList.getBook(0));
+        assertEquals(testBook1, testBookList.getBook(1));
+    }
+
+    @Test
+    void testAddByIndex() {
+        testBookList.addByIndex(0,testBook2);
+        assertEquals(testBook2, testBookList.getBook(0));
+    }
+
+    @Test
+    void testRemoveByIndex() {
+        testBookList.removeByIndex(0);
+        assertEquals(testBook1, testBookList.getBook(0));
+    }
+
+
+    @Test
     void testToJson() {
         JSONArray testJsonArray = testBookList.toJson();
 

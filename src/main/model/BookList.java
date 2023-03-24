@@ -40,6 +40,27 @@ public class BookList {
         this.bookList.remove(book);
     }
 
+    // REQUIRES: a integer, index <= the length of book list
+    // MODIFIES: this
+    // EFFECTS: get a book from the book list
+    public Book getBook(int index) {
+        return this.bookList.get(index);
+    }
+
+    // REQUIRES: an integer index, index <= the length of book list, a book
+    // MODIFIES: this
+    // EFFECTS: adds a new book to the list of books at the index
+    public void addByIndex(int index, Book book) {
+        this.bookList.add(index, book);
+    }
+
+    // REQUIRES: an integer index, index <= the length of book list
+    // MODIFIES: this
+    // EFFECTS: remove the book at the index from the book list
+    public void removeByIndex(int index) {
+        this.bookList.remove(index);
+    }
+
     // EFFECTS: returns the book list as a JSON array
     public JSONArray toJson() {
         JSONArray jsonArray = new JSONArray();

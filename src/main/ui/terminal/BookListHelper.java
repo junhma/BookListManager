@@ -1,4 +1,4 @@
-package ui;
+package ui.terminal;
 
 import exceptions.NegativeChapterException;
 import model.Book;
@@ -34,12 +34,12 @@ public class BookListHelper {
     protected static void removeBooksHelper(BookList bookList, Scanner input) {
         System.out.println("Choose a book to remove.");
         for (int i = 0; i < bookList.getBookListLength(); i++) {
-            System.out.println(i + " " + bookList.getBookList().get(i).getTitle());
+            System.out.println(i + " " + bookList.getBook(i).getTitle());
         }
 
         try {
             int choice = Integer.parseInt(input.next());
-            Book removedBook = bookList.getBookList().get(choice);
+            Book removedBook = bookList.getBook(choice);
             bookList.removeBook(removedBook);
 
         } catch (NumberFormatException e) {
@@ -51,19 +51,42 @@ public class BookListHelper {
 
     // REQUIRES: a book list
     // MODIFIES: the book list
+    // EFFECTS: see and edit the title for a given book
+    protected static void changeTitlesHelper(BookList bookList, Scanner input) {
+
+        System.out.println("Choose a book to edit.");
+
+        for (int i = 0; i < bookList.getBookListLength(); i++) {
+            System.out.println(i + " " + bookList.getBook(i).getTitle());
+        }
+
+        try {
+            int choice = Integer.parseInt(input.next());
+            Book editedBook = bookList.getBook(choice);
+            System.out.println("Enter the new title.");
+            input.nextLine();
+            String title = input.nextLine();
+            editedBook.changeTitle(title);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please choose one of the above options.");
+        }
+    }
+
+    // REQUIRES: a book list
+    // MODIFIES: the book list
     // EFFECTS: see and edit the number of chapters for a given book
     protected static void changeChaptersHelper(BookList bookList, Scanner input) {
 
-        System.out.println("\nChoose a book.");
+        System.out.println("Choose a book to edit.");
 
         for (int i = 0; i < bookList.getBookListLength(); i++) {
-            System.out.println(i + " " + bookList.getBookList().get(i).getTitle());
+            System.out.println(i + " " + bookList.getBook(i).getTitle());
         }
 
         try {
             int choice = Integer.parseInt(input.next());
 
-            Book editedBook = bookList.getBookList().get(choice);
+            Book editedBook = bookList.getBook(choice);
 
             System.out.println("You are currently at chapter " + editedBook.getChapter());
             System.out.println("Enter the new number of chapters.");
@@ -77,7 +100,5 @@ public class BookListHelper {
         } catch (NegativeChapterException e) {
             System.out.println("Please input a positive integer.");
         }
-
-
     }
 }

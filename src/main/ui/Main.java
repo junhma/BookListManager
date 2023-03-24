@@ -1,16 +1,17 @@
 package ui;
 
-import java.io.FileNotFoundException;
+import ui.gui.MainPanel;
 
 /**
  * code based on <a href="https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo">...</a>
  */
 public class Main {
     public static void main(String[] args) {
-        try {
+/*        try {
             new BookListApp();
         } catch (FileNotFoundException e) {
             System.out.println("Unable to run application: file not found");
-        }
+        }*/
+        new MainPanel();
     }
 }
