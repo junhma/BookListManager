@@ -18,6 +18,7 @@ As a user, I want to be able to:
 - view the list of books in my list
 - remove a book from my list
 - see the number of chapter I've read
-- edit the number of chapters I've read
+- edit the number of chapters
+- edit the title of books
 - have the option to save my book list to a file
 - have the option to load my book list from a file

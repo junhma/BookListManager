@@ -5,26 +5,44 @@ import model.Book;
 import model.BookList;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class BookTable extends JPanel {
+public class BookTable extends Component {
 
-    private final Font font = new Font("SansSerif", Font.PLAIN, 12);
-    private BookList bookList;
-    private BookTableModel model;
-    private JTable jTable;
+    protected JTable table;
+    public MainFrame.Toggle editable;
+    public BookList bookList;
 
-    public BookTable() {
-        initializeFields();
-        jTable.setFont(font);
+    public BookTable(MainFrame panel, JComponent parent) {
+        super(panel, parent);
     }
 
-    private void initializeFields() {
-        bookList = new BookList();
-        model = new BookTableModel();
-        jTable = new JTable(model);
+    // MODIFIES: this
+    // EFFECTS:  customizes the table
+    protected JTable customizeTable(JTable table) {
+        return table;
+    }
 
-        //// test
+    @Override
+    // EFFECTS: creates table
+    protected void createComponent(JComponent parent) {
+        BookTableModel model = new BookTableModel();
+        addBooks(model);
+        table = new JTable(model);
+        table = customizeTable(table);
+        addToParent(parent);
+        editable = model.editable;
+        bookList = model.bookList;
+    }
+
+    @Override
+    // MODIFIES: parent
+    // EFFECTS:  adds the given button to the parent component
+    public void addToParent(JComponent parent) {
+        JScrollPane tableContainer = new JScrollPane(table);
+        parent.add(tableContainer);
+    }
+
+    private void addBooks(BookTableModel model) {
         try {
             Book testBook0 = new Book("Overlord", 10);
             Book testBook1 = new Book("The Beginning after the End", 102);
@@ -32,6 +50,31 @@ public class BookTable extends JPanel {
 
             model.addBook(testBook0);
             model.addBook(testBook1);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook0);
+            model.addBook(testBook1);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook0);
+            model.addBook(testBook1);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook0);
+            model.addBook(testBook1);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
+            model.addBook(testBook2);
             model.addBook(testBook2);
         } catch (NegativeChapterException e) {
         }

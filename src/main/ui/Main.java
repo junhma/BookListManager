@@ -1,8 +1,9 @@
 package ui;
 
-import ui.gui.MainPanel;
+import ui.gui.MainFrame;
 
 /**
+ * Represent the main program to be run
  * code based on <a href="https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo">...</a>
  */
 public class Main {
@@ -12,6 +13,6 @@ public class Main {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to run application: file not found");
         }*/
-        new MainPanel();
+        new MainFrame();
     }
 }

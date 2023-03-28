@@ -32,7 +32,7 @@ public class Book {
 
     // MODIFIES: this
     // EFFECTS: change book title
-    public void changeTitle(String title){
+    public void changeTitle(String title) {
         this.title = title;
     }
 
