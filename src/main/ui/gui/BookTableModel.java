@@ -54,7 +54,8 @@ public class BookTableModel extends AbstractTableModel {
     }
 
     // REQUIRES: an integer for row, an integer for column
-    // EFFECTS: if the title column is indicated, return the title of the book at the given row; if the chapter column is indicated, return the chapter.
+    // EFFECTS: if the title column is indicated, return the title of the book at the given row
+    // if the chapter column is indicated, return the chapter.
     @Override
     public Object getValueAt(int row, int column) {
         Book book = getBook(row);
@@ -67,7 +68,9 @@ public class BookTableModel extends AbstractTableModel {
 
     // REQUIRES: an integer for row, an integer for column, a string or an integer
     // MODIFIES: this
-    // EFFECTS: if the title column is indicated, change the title of the book at the given row to the given string; if the chapter column is indicated, change the chapter of the book to the given integer. Pop up an infobox when the wrong type is provided.
+    // EFFECTS: if the title column is indicated, change the title of the book at the given row to the given string
+    // if the chapter column is indicated, change the chapter of the book to the given integer.
+    // Pop up an infobox when the wrong type is provided.
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
         Book book = bookList.getBook(rowIndex);
