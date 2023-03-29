@@ -24,8 +24,10 @@ As a user, I want to be able to:
 - have the option to load my book list from a file
 
 ## Instructions for Grader
-- how to generate the first of the two required actions that are related to the required user story "add multiple Xs to a Y" (e.g., click the button labelled "Add an X", or select the menu item labelled "Add an X", or type <ctrl>+N on the keyboard to add an X,...)
-- how to generate the second of the two required actions
-- where to find the visual component that was added to your project (e.g., background image, image added to button)
-- how does the user save the state of the application to file
-- how does the user load the state of the application from file
+
+- To edit books, click on the "Edit" button to enable editing, the double click on the field the user wish to edit. 
+- To add books, first click the "Edit" button to enable editing. Then click the "Add" button to add new rows. Once that is done, enter the titles and chapters for the new books in the new rows.
+- To remove a book, first click the "Edit" button to enable editing. Then select a book by clicking on its row. Then click the "Remove" button. Without a selection, the remove button removes the first row by default.
+- The visual component is in the folder images, and are icons for pop up messages. They appear when saving or loading is successful.
+- The user can save the state of the application by clicking the  "Save" button.
+- The user can load the state of the application by clicking the "Load" button.

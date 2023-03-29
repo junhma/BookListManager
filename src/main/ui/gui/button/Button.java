@@ -4,6 +4,9 @@ import ui.gui.MainFrame;
 
 import javax.swing.*;
 
+/**
+ * An abstract class for buttons.
+ */
 public abstract class Button extends JButton {
 
     protected MainFrame frame;
@@ -23,9 +26,11 @@ public abstract class Button extends JButton {
         this.setContentAreaFilled(true);
     }
 
-    // EFFECTS: creates button
     protected abstract void createComponent(JComponent parent);
 
+    // REQUIRES: a parent component
+    // MODIFIES: the parent component
+    // EFFECTS: creates button
     public void addToParent(JComponent parent) {
         parent.add(this);
     }
