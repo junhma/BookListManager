@@ -6,16 +6,15 @@ import javax.swing.*;
 
 public class LoadButton extends Button {
 
-    public LoadButton(MainFrame panel, JComponent parent) {
-        super(panel, parent);
+    public LoadButton(MainFrame frame, JComponent parent) {
+        super(frame, parent, "Load");
     }
 
     // MODIFIES: this
     // EFFECTS:  creates new button and adds to parent
     @Override
     protected void createComponent(JComponent parent) {
-        button = new JButton(new LoadAction(panel));
-        button = customizeButton(button);
+        customizeButton();
         addToParent(parent);
     }
 }

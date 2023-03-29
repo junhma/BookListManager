@@ -1,6 +1,9 @@
 package ui;
 
 import ui.gui.MainFrame;
+import ui.terminal.BookListApp;
+
+import java.io.FileNotFoundException;
 
 /**
  * Represent the main program to be run
@@ -8,11 +11,11 @@ import ui.gui.MainFrame;
  */
 public class Main {
     public static void main(String[] args) {
-/*        try {
+        new MainFrame();
+        try {
             new BookListApp();
         } catch (FileNotFoundException e) {
             System.out.println("Unable to run application: file not found");
-        }*/
-        new MainFrame();
+        }
     }
 }

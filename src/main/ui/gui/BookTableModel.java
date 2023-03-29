@@ -3,10 +3,9 @@ package ui.gui;
 import exceptions.NegativeChapterException;
 import model.Book;
 import model.BookList;
+import static ui.gui.MainFrame.infoBox;
 
 import javax.swing.table.AbstractTableModel;
-
-import static java.lang.Boolean.FALSE;
 
 /**
  * Represents the model for Book Table
@@ -14,12 +13,21 @@ import static java.lang.Boolean.FALSE;
 public class BookTableModel extends AbstractTableModel {
 
     private final String[] columnNames = {"Name", "Chapter"};
-    public BookList bookList;
-    public MainFrame.Toggle editable;
+    private final BookList bookList;
+    private Boolean editable;
 
-    public BookTableModel() {
-        bookList = new BookList();
-        editable = new MainFrame.Toggle(FALSE);
+    public BookTableModel(BookList bookList) {
+        this.bookList = bookList;
+        editable = false;
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 
     @Override
@@ -28,29 +36,13 @@ public class BookTableModel extends AbstractTableModel {
     }
 
     @Override
-    public int getRowCount() {
-        return bookList.getBookListLength();
+    public String getColumnName(int column) {
+        return columnNames[column];
     }
 
-    //    @Override
-//    public String getColumnName(int column)
-//    {
-//        return columnNames[column];
-//    }
-
-//    @Override
-//    public Class getColumnClass(int column)
-//    {
-//        switch (column)
-//        {
-//            case 2: return Date.class;
-//            default: return String.class;
-//        }
-//    }
-
     @Override
-    public boolean isCellEditable(int row, int column) {
-        return editable.getVal(); //request current value
+    public int getRowCount() {
+        return bookList.getBookListLength();
     }
 
     @Override
@@ -65,34 +57,33 @@ public class BookTableModel extends AbstractTableModel {
     }
 
     @Override
-    public void setValueAt(Object value, int row, int column) {
-        Book book = getBook(row);
-
-        switch (column) {
-            case 0: book.changeTitle((String)value); break;
-            case 1:
-                try {
-                    book.changeChapter((int) value);
-                } catch (NegativeChapterException e) {
-                    // nothing
-                }
-                break;
+    public void setValueAt(Object value, int rowIndex, int columnIndex) {
+        Book book = bookList.getBook(rowIndex);
+        if (0 == columnIndex) {
+            book.changeTitle((String) value);
+        } else if (1 == columnIndex) {
+            try {
+                int chapter = Integer.parseInt((String) value);
+                book.changeChapter(chapter);
+            } catch (Exception e) {
+                infoBox("Invalid input. Chapter numbers must be a positive integer.");
+            }
         }
-
-        fireTableCellUpdated(row, column);
     }
 
     public Book getBook(int row) {
         return bookList.getBook(row);
     }
 
-    public void addBook(Book book) {
-        insertBook(getRowCount(), book);
-    }
-
-    public void insertBook(int row, Book book) {
-        bookList.addByIndex(row, book);
-        fireTableRowsInserted(row, row);
+    public void newRow() {
+        Book book = null;
+        try {
+            book = new Book("", 0);
+        } catch (NegativeChapterException e) {
+            infoBox("Invalid input. Chapter numbers must be a positive integer.");
+        }
+        bookList.addByIndex(getRowCount(), book);
+        fireTableRowsInserted(getRowCount(), getRowCount());
     }
 
     public void removeBook(int row) {

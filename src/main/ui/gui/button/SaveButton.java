@@ -6,16 +6,15 @@ import javax.swing.*;
 
 public class SaveButton extends Button {
 
-    public SaveButton(MainFrame panel, JComponent parent) {
-        super(panel, parent);
+    public SaveButton(MainFrame frame, JComponent parent) {
+        super(frame, parent, "Save");
     }
 
     // MODIFIES: this
     // EFFECTS:  creates new button and adds to parent
     @Override
     protected void createComponent(JComponent parent) {
-        button = new JButton(new SaveAction(panel));
-        button = customizeButton(button);
+        customizeButton();
         addToParent(parent);
     }
 }

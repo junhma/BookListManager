@@ -4,10 +4,10 @@ import ui.gui.MainFrame;
 
 import javax.swing.*;
 
-public class EditButton extends Button {
+public class DeleteButton extends Button {
 
-    public EditButton(MainFrame frame, JComponent parent) {
-        super(frame, parent, "Edit");
+    public DeleteButton(MainFrame frame, JComponent parent) {
+        super(frame, parent, "Delete");
     }
 
     // MODIFIES: this

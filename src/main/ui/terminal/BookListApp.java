@@ -70,29 +70,21 @@ public class BookListApp {
     // EFFECTS: processes user command
     protected void processCommand(String command) {
         switch (command) {
-            case "a":
-                addBooksHelper(bookList, input);
+            case "a": addBooksHelper(bookList, input);
                 break;
-            case "r":
-                removeBooksHelper(bookList, input);
+            case "r": removeBooksHelper(bookList, input);
                 break;
-            case "t":
-                changeTitlesHelper(bookList, input);
+            case "t": changeTitlesHelper(bookList, input);
                 break;
-            case "c":
-                changeChaptersHelper(bookList, input);
+            case "c": changeChaptersHelper(bookList, input);
                 break;
-            case "p":
-                printBooks();
+            case "p": printBooks();
                 break;
-            case "s":
-                saveBookList();
+            case "s": saveBookList();
                 break;
-            case "l":
-                loadBookList();
+            case "l": loadBookList();
                 break;
-            default:
-                System.out.println("\nSelection not valid.");
+            default: System.out.println("\nSelection not valid.");
                 break;
         }
     }
