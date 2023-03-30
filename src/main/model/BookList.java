@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Represents a book list (a list of books).
  */
-public class BookList{
+public class BookList {
 
     private final List<Book> bookList;
 
