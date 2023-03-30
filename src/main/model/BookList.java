@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Represents a book list (a list of books).
  */
-public class BookList {
+public class BookList extends Subject {
 
     private final List<Book> bookList;
 
@@ -68,5 +68,10 @@ public class BookList {
             jsonArray.put(book.bookToJson());
         }
         return jsonArray;
+    }
+
+    @Override
+    public void notifyObservers() {
+
     }
 }

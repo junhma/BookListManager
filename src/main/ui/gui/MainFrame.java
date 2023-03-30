@@ -33,8 +33,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private BookTableModel bookTableModel;
     private JTable bookTable;
 
-    private int selection;
-
     public MainFrame() {
         super("Book List");
         initializeFields();
@@ -88,21 +86,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private void createTable() {
         JScrollPane tableContainer = new JScrollPane(bookTable);
         add(tableContainer, BorderLayout.CENTER);
-        TableMouseListener ml = new TableMouseListener();
-        bookTable.addMouseListener(ml);
-    }
-
-    /**
-     * Represents the mouse listener.
-     */
-    private class TableMouseListener extends MouseAdapter {
-
-        // EFFECTS: select the row indicated by mouse press
-        @Override
-        public void mousePressed(MouseEvent e) {
-            selection = bookTable.getSelectedRow();
-            bookTable.clearSelection();
-        }
     }
 
     // REQUIRES: an action event
@@ -141,9 +124,12 @@ public class MainFrame extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: remove the selected row from the book table model, refresh the model
     private void delete() {
-        bookTableModel.removeBook(selection);
+        int[] selectedRows = bookTable.getSelectedRows();
+        for (int i = selectedRows.length - 1; i >= 0; i--) {
+            System.out.println(selectedRows[i]);
+            bookTableModel.removeBook(selectedRows[i]);
+        }
         bookTableModel.fireTableDataChanged();
-        selection = 0;
     }
 
     // MODIFIES: this
@@ -173,7 +159,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     // EFFECTS: info box for successful operations
-    // image from https://static.vecteezy.com/system/resources/previews/000/572/885/original/check-mark-icon-vector.jpg
+    // image from <a href="https://static.vecteezy.com/system/resources/previews/000/572/885/original/check-mark-icon-vector.jpg">...</a>
     public static void infoBoxSuccess(String infoMessage) {
         ImageIcon icon = new ImageIcon("./images/checkmark.png");
         JOptionPane.showMessageDialog(null, infoMessage, null, JOptionPane.INFORMATION_MESSAGE, icon);

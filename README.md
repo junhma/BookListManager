@@ -26,8 +26,8 @@ As a user, I want to be able to:
 ## Instructions for Grader
 
 - To edit books, click on the "Edit" button to enable editing, the double click on the field the user wish to edit. 
-- To add books, first click the "Edit" button to enable editing. Then click the "Add" button to add new rows. Once that is done, enter the titles and chapters for the new books in the new rows.
-- To remove a book, first click the "Edit" button to enable editing. Then select a book by clicking on its row. Then click the "Remove" button. Without a selection, the remove button removes the first row by default.
+- To add books, click the "Add" button to add new rows. Once that is done, click on the "Edit" button to enable editing, then enter the titles and chapters for the new books in the new rows.
+- To remove books, first select the rows by dragging the mouse. Then click the "Remove" button.
 - The visual component is in the folder images, and are icons for pop up messages. They appear when saving or loading is successful.
 - The user can save the state of the application by clicking the  "Save" button.
 - The user can load the state of the application by clicking the "Load" button.
