@@ -1,6 +1,6 @@
 package model;
 
-import exceptions.NegativeChapterException;
+import model.exceptions.NegativeChapterException;
 import org.json.JSONObject;
 
 /**
@@ -34,6 +34,7 @@ public class Book {
     // EFFECTS: change book title
     public void changeTitle(String title) {
         this.title = title;
+        EventLog.getInstance().logEvent(new Event("A book title is changed."));
     }
 
     // REQUIRES: int >= 0
@@ -44,6 +45,7 @@ public class Book {
             throw new NegativeChapterException();
         }
         this.chapter = chapter;
+        EventLog.getInstance().logEvent(new Event("A book chapter is changed."));
     }
 
     // EFFECTS: make 2 books as equal if they have the same titles and chapters

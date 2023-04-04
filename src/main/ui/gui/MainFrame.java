@@ -1,9 +1,12 @@
 package ui.gui;
 
 import model.BookList;
-import persistence.JsonReader;
-import persistence.JsonWriter;
+import model.Event;
+import model.EventLog;
+import model.persistence.JsonReader;
+import model.persistence.JsonWriter;
 import ui.gui.button.*;
+import ui.gui.button.Button;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,20 +17,20 @@ import java.io.IOException;
 /**
  * Represents the main window of the application
  */
-public class MainFrame extends JFrame implements ActionListener {
+public class MainFrame extends JFrame implements ActionListener, WindowListener {
 
-    public static final int WIDTH = 700;
-    public static final int HEIGHT = 700;
+    private static final int WIDTH = 700;
+    private static final int HEIGHT = 700;
 
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    public static final String JSON_STORE = "./data/bookList.json";
+    private static final String JSON_STORE = "./data/bookList.json";
 
-    private EditButton editButton;
-    private SaveButton saveButton;
-    private LoadButton loadButton;
-    private AddButton addButton;
-    private DeleteButton deleteButton;
+    private Button editButton;
+    private Button saveButton;
+    private Button loadButton;
+    private Button addButton;
+    private Button deleteButton;
 
     private BookList bookList;
     private BookTableModel bookTableModel;
@@ -56,7 +59,8 @@ public class MainFrame extends JFrame implements ActionListener {
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
         createTable();
         createButtons();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(this);
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -126,7 +130,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private void delete() {
         int[] selectedRows = bookTable.getSelectedRows();
         for (int i = selectedRows.length - 1; i >= 0; i--) {
-            System.out.println(selectedRows[i]);
             bookTableModel.removeBook(selectedRows[i]);
         }
         bookTableModel.fireTableDataChanged();
@@ -170,5 +173,44 @@ public class MainFrame extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null, infoMessage, null, JOptionPane.PLAIN_MESSAGE);
     }
 
+    // REQUIRES: a window event
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
 
+    // REQUIRES: a window event
+    // EFFECTS: close the window, print the event log to the console
+    @Override
+    public void windowClosing(WindowEvent e) {
+        dispose();
+        EventLog eventLog = EventLog.getInstance();
+        for (Event event : eventLog) {
+            System.out.println(event);
+        }
+    }
+
+    // REQUIRES: a window event
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    // REQUIRES: a window event
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    // REQUIRES: a window event
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    // REQUIRES: a window event
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    // REQUIRES: a window event
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+    }
 }

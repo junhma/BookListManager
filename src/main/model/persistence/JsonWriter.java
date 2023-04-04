@@ -1,7 +1,9 @@
-package persistence;
+package model.persistence;
 
 import model.BookList;
 
+import model.Event;
+import model.EventLog;
 import org.json.JSONArray;
 
 import java.io.FileNotFoundException;
@@ -28,10 +30,11 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of book list to file
+    // EFFECTS: writes JSON representation of book list to file, log the event
     public void write(BookList bookList) {
         JSONArray json = bookList.toJson();
         saveToFile(json.toString(TAB));
+        EventLog.getInstance().logEvent(new Event("The book list is saved to file."));
     }
 
     // MODIFIES: this

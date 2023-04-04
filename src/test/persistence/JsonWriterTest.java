@@ -1,8 +1,10 @@
 package persistence;
 
-import exceptions.NegativeChapterException;
+import model.exceptions.NegativeChapterException;
 import model.Book;
 import model.BookList;
+import model.persistence.JsonReader;
+import model.persistence.JsonWriter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

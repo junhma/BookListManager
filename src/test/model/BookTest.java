@@ -1,6 +1,6 @@
 package model;
 
-import exceptions.NegativeChapterException;
+import model.exceptions.NegativeChapterException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

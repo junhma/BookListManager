@@ -1,7 +1,6 @@
 package ui;
 
 import ui.gui.MainFrame;
-import ui.terminal.BookListApp;
 
 import java.io.FileNotFoundException;
 

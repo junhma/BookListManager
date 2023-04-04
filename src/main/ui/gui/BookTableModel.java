@@ -1,6 +1,6 @@
 package ui.gui;
 
-import exceptions.NegativeChapterException;
+import model.exceptions.NegativeChapterException;
 import model.Book;
 import model.BookList;
 import static ui.gui.MainFrame.infoBox;

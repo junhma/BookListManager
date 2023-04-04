@@ -1,7 +1,6 @@
 package model;
 
 import org.json.JSONArray;
-import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +8,7 @@ import java.util.ArrayList;
  */
 public class BookList {
 
-    private final List<Book> bookList;
+    private final ArrayList<Book> bookList;
 
     // EFFECTS: constructs a new book list
     public BookList() {
@@ -17,7 +16,7 @@ public class BookList {
     }
 
     // EFFECTS: returns the book list
-    public List<Book> getBookList() {
+    public ArrayList<Book> getBookList() {
         return this.bookList;
     }
 
@@ -28,16 +27,18 @@ public class BookList {
 
     // REQUIRES: a book
     // MODIFIES: this
-    // EFFECTS: adds a new book to the list of books
+    // EFFECTS: adds a new book to the list of books, log the event
     public void addBook(Book book) {
         this.bookList.add(book);
+        EventLog.getInstance().logEvent(new Event("A book is added."));
     }
 
     // REQUIRES: a book in the book list
     // MODIFIES: this
-    // EFFECTS: remove a book from the book list
+    // EFFECTS: remove a book from the book list, log the event
     public void removeBook(Book book) {
         this.bookList.remove(book);
+        EventLog.getInstance().logEvent(new Event("A book is removed."));
     }
 
     // REQUIRES: a integer, index <= the length of book list
@@ -49,16 +50,18 @@ public class BookList {
 
     // REQUIRES: an integer index, index <= the length of book list, a book
     // MODIFIES: this
-    // EFFECTS: adds a new book to the list of books at the index
+    // EFFECTS: adds a new book to the list of books at the index, log the event
     public void addByIndex(int index, Book book) {
         this.bookList.add(index, book);
+        EventLog.getInstance().logEvent(new Event("A book is added."));
     }
 
     // REQUIRES: an integer index, index <= the length of book list
     // MODIFIES: this
-    // EFFECTS: remove the book at the index from the book list
+    // EFFECTS: remove the book at the index from the book list, log the event
     public void removeByIndex(int index) {
         this.bookList.remove(index);
+        EventLog.getInstance().logEvent(new Event("A book is removed."));
     }
 
     // EFFECTS: returns the book list as a JSON array

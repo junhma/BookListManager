@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package model {
+    class Book
+    class BookList
+    class Event
+    class EventLog
+    package persistence {
+        class JsonReader
+        class JsonWriter
+    }
+}
+
+package ui {
+    together{
+        class Main
+        class BookListApp
+    }
+    package gui {
+        class BookTableModel
+        class MainFrame
+        package button {
+            abstract class Button
+            class AddButton
+            class DeleteButton
+            class EditButton
+            class LoadButton
+            class SaveButton
+        }
+    }
+}
+
+BookList o--> "0...*" Book
+EventLog o--> "0...*" Event
+
+Button --> "1" MainFrame
+BookTableModel --> "1" BookList
+
+MainFrame --> "1" BookList
+MainFrame --> "1" JsonReader
+MainFrame --> "1" JsonWriter
+MainFrame --> "5" Button
+MainFrame --> "1" BookTableModel
+
+BookListApp --> "1" BookList
+BookListApp --> "1" JsonReader
+BookListApp --> "1" JsonWriter
+
+
+Button <|-- AddButton
+Button <|-- DeleteButton
+Button <|-- EditButton
+Button <|-- LoadButton
+Button <|-- SaveButton
+
+hide members
+skinparam linetype ortho
+
+@enduml
