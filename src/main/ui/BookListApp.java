@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 /**
  * Represents the book list application.
- * code based on <a href="https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo">...</a>
  */
 public class BookListApp {
 

@@ -9,7 +9,6 @@ import java.util.Iterator;
  * We use the Singleton Design Pattern to ensure that there is only
  * one EventLog in the system and that the system has global access
  * to the single instance of the EventLog.
- * code from <a href="https://github.students.cs.ubc.ca/CPSC210/AlarmSystem">...</a>
  */
 public class EventLog implements Iterable<Event> {
     /** the only EventLog in the system (Singleton Design Pattern) */
